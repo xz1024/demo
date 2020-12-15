@@ -3,6 +3,9 @@ node_modules
  
 demo
 docs
+
+react-class-source-code
+
 # local env files
 .env.local
 .env.*.local

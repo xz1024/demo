@@ -9,26 +9,24 @@
 
 <body>
     <script>
-        //写出下面代码输出结果，并解释原因
-        // 代码片段一
-        setTimeout(() => console.log('timer API'), 10)
-        new Promise((resolve, reject) => resolve('microtask run')).then(arg => console.log(arg);
-        process.nextTick(() => console.log('run next tick'))
-        setImmediate(() => console.log('setImmediate API'))
+        Object.prototype.pr = '我是原型属性';
+        let s = Symbol();
+        let obj = {
+            [s]: 'this is Symbol',
+            a: '我是a'
 
-        // 代码片段二
-        new Promise((res, rej) => {
-            console.log(1);
-            res(2);
-        }).then(res => console.log(res), rej => { }).catch(e => { });
-        async function a() {
-            console.log(3);
-            await console.log(4);
-            console.log(5);
         }
-        a();
+        Object.defineProperty(obj, 'def', {
+            value: '我是def',
+            configurable: true,
+            enumerable: false,
+            writable: true
+        })
 
-
+        console.log('Object.keys', Object.keys(obj))
+        console.log('Reflect.ownKeys(obj)', Reflect.ownKeys(obj))
+        console.log('Object.getOwnProperyDescriptor', Object.getOwnPropertyDescriptor(obj, s))
+        console.log('Object.getOwnProperyDescriptors', Object.getOwnPropertyDescriptors(obj))
     </script>
 </body>
 

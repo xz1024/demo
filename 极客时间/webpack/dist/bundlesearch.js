@@ -1,0 +1,1 @@
+document.addEventListener("scroll",(()=>{console.log(1)}));

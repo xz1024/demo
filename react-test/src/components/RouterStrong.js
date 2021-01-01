@@ -17,6 +17,7 @@ Object.defineProperty(utils, 'route', {
         return window[curHistory] ? window[curHistory].route : null
     }
 })
+
 export const getHistory = () => window[curHistory];
 export let rsUtils = utils;
 function isPromise (obj) {

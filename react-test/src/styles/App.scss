@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
 }
+html,body,#root{
+    height: 100%;
+}
 .app{
+    height: 100%;
     width: 600px;
     margin: 0 auto;
     .nav{
@@ -10,6 +14,58 @@
         border: 1px solid #ddd;
         a{
             margin: 20px;
+        }
+    }
+}
+.pattern-modal-99{
+    .ant-modal-body{
+        padding: 0;
+    }
+    .pattern-modal-c{
+        overflow: hidden;
+        .top-div{
+            display: flex;
+            flex-direction: row;
+            height: 80px;
+            align-items: center;
+            background: #eee;
+            box-shadow: 0 3px 20px 4px #ddd;
+            .ant-btn{
+                margin:0 10px;
+            }
+            .step-div{
+                padding: 0 50px;
+                flex:1;
+            }
+            .right{
+                width: 235px;
+            }
+        }
+        .content-div{
+            width: 100%;
+            overflow-y: auto;
+            height: calc(100vh - 100px);
+            .inner-sec{
+                margin: 0 auto;
+                padding:60px 0;
+                width: 800px;
+            }
+            .tit-1{
+                line-height: 30px;
+                padding-top: 20px;
+            }
+            .pre{
+                height: 300px;
+                white-space: pre-wrap;
+            }
+            .sec-div-3{
+                text-align: center;
+                padding: 20px;
+                .publish-btn{
+                    margin: 0 auto;
+                    margin-top: 30px;
+                }
+            }
         }
     }
 }

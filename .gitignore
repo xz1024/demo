@@ -4,8 +4,7 @@ node_modules
 demo
 docs
 
-react-class-source-code
-
+dist
 # local env files
 .env.local
 .env.*.local

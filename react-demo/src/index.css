@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  html,body,#root{
+    height: 100%;
+  }
+  .app{
+    height: 100%;
+    width: 600px;
+    margin: 0 auto;
+    
+  }
+  .nav{
+    height: 100px;
+    border: 1px solid #ddd;
+   
+  }
+  a{
+    margin: 20px;
+  }

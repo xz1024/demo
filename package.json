@@ -19,6 +19,7 @@
   "homepage": "https://github.com/xz1024/my-practice#readme",
   "dependencies": {
     "es6-promise": "^4.2.8",
-    "fetch-ie8": "^1.5.0"
+    "fetch-ie8": "^1.5.0",
+    "react-router": "^5.2.0"
   }
 }

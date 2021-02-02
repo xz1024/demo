@@ -1,57 +1,41 @@
 import React, { useState } from 'react';
 import { Spin, Alert } from 'antd';
-
 import LazyLoad from './LazyLoad'
 import { BrowserRouter, HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import RouterStrong from 'react-router-strong'
 
 import Layout from './pages/Layout'
-// import Car from './pages/Car'
 
-const Home = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Home" */ './pages/app/Home')));
-const Login = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Login" */ './pages/user/Login')));
-const Car = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Car" */ './pages/app/Car')));
-const BWM = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Car" */ './pages/app/Bwm')));
-const Dog = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Dog" */ './pages/Dog')));
+const Login = LazyLoad(React.lazy(() => import(/* webpackChunkName: "login" */ './pages/user/login')));
+const Regist = LazyLoad(React.lazy(() => import(/* webpackChunkName: "regist" */ './pages/user/regist')));
 
-const routes = [
+const Cat = LazyLoad(React.lazy(() => import(/* webpackChunkName: "cat" */ './pages/cat/cat')));
+const Pig = LazyLoad(React.lazy(() => import(/* webpackChunkName: "pig" */ './pages/pig/pig')));
+
+const DogLayout = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Dog" */ './pages/dog/DogLayout')));
+const KeJi = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Dog" */ './pages/dog/keji')));
+const FaDou = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Dog" */ './pages/dog/fadou')));
+
+const config = [
+    { path: '/login', component: Login },
+    { path: '/regist', component: Regist },
+    // { path: '/404', component: () => <div>404</div> },
     {
-        path: "/",
-        redirect: '/app/home',
-    },
-    {
-        path: "/app",
+        path: "/animal",
         component: Layout,
-        redirect: '/app/home',
+        redirect: '/animal/cat',
         children: [
+            { path: '/animal/cat', aliasPath: ['/cat'], component: Cat },
+            { path: '/animal/pig', component: Pig },
             {
-                path: '/app/home', aliasPath: ['/home'], component: Home
-            },
-            {
-                path: '/app/car',
-                component: Car,
+                path: '/animal/dog', component: DogLayout,
                 children: [
-                    {
-                        path: '/app/car/bwm', component: BWM
-                    }
+                    { path: '/animal/dog/keji', component: KeJi },
+                    { path: '/animal/dog/fadou', component: FaDou }
                 ]
             },
         ]
-    },
-    {
-        path: "/user",
-        children: [
-            {
-                path: '/user/login', component: Login
-            },
-
-        ]
-    },
-    {
-        path: "/404", component: () => <div>this is 404</div>
     }
-    // {
-    //     path: "/dog", component: Dog
-    // }
 ]
 const sleep = (time) => new Promise((resolve) => {
     setTimeout(() => {
@@ -61,28 +45,20 @@ const sleep = (time) => new Promise((resolve) => {
 
 export default () => {
     return (
-        <div className="app">
-            <BrowserRouter>
-                <Switch>
-                    <Route path='/app' component={Layout} routes={
-                        [
-                            {
-                                path: '/app/home', aliasPath: ['/home'], component: Home
-                            },
-                            {
-                                path: '/app/car',
-                                component: Car,
-                                children: [
-                                    {
-                                        path: '/app/car/bwm', component: BWM
-                                    }
-                                ]
-                            },
-                        ]
-                    }>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </div>
+        <RouterStrong
+            indexPath='/animal/cat'
+            noFoundPath='/404'
+            mode={'history'}
+            isSwitch={true}
+            config={config}
+            beforeEach={async (to, from, next) => {
+                await sleep(2000)
+                next()
+            }}
+            afterEach={() => {
+                console.log('afterEach')
+            }}
+        >
+        </RouterStrong>
     )
 };

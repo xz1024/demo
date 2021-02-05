@@ -30,8 +30,8 @@ const config = [
             {
                 path: '/animal/dog', component: DogLayout,
                 children: [
-                    { path: '/animal/dog/keji', component: KeJi },
-                    { path: '/animal/dog/fadou', component: FaDou }
+                    { path: '/animal/dog/:id', component: KeJi },
+                    // { path: '/animal/dog/fadou', component: FaDou }
                 ]
             },
         ]
@@ -47,7 +47,7 @@ export default () => {
     return (
         <RouterStrong
             indexPath='/animal/cat'
-            noFoundPath='/404'
+            noMatch='/404'
             mode={'history'}
             isSwitch={true}
             config={config}
@@ -56,7 +56,7 @@ export default () => {
                 next()
             }}
             afterEach={() => {
-                console.log('afterEach')
+                console.log('--------------afterEach-----------------------')
             }}
         >
         </RouterStrong>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Menu, Layout } from 'antd';
+import { Button, Menu, Layout,Space } from 'antd';
 import { Link } from 'react-router-dom';
 import { rsUtils } from 'react-router-strong'
 const { SubMenu } = Menu;
@@ -30,6 +30,17 @@ class LayoutComp extends React.Component {
                     </Menu>
                 </Sider>
                 <Layout>
+                    <Header>
+                        <Space>
+                            <Button type="dashed" size="small" onClick={()=>{
+                                this.props.history.push('/animal/cat?p=123')
+                            }}>/animal/cat?p=123</Button>
+                           
+                           <Button type="dashed" size="small" onClick={()=>{
+                                this.props.history.push('/animal/cat?p=123')
+                            }}>/animal/cat?p=123</Button>
+                        </Space>
+                    </Header>
                     <Content> {this.props.children}</Content>
                 </Layout>
             </Layout>

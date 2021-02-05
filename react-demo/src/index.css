@@ -22,3 +22,9 @@
       width: 700px;
       max-width: 80%;
   }
+  .ant-layout-header{
+    background: #fff;
+  }
+  .t-btn{
+    margin: 5px;
+  }

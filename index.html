@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/debounce.js"></script>
+    <script src="./js/throttle.js"></script>
+    <style>
+        .div {
+            width: 200px;
+            height: 150px;
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" name="" id="input">
+    <input type="text" name="" id="input2">
+    <div class="div" id="div1"></div>
+    <br>
+    <div class="div" id="div2"></div>
+    <script>
+        var p = document.getElementById('input');
+        var p2 = document.getElementById('input2');
+        var div1 = document.getElementById('div1')
+        var div2 = document.getElementById('div2')
+        let go = function (e) {
+            console.log(this, e)
+        }
+        p.addEventListener("input", debounce(go, 300, true), false)
+        p2.addEventListener("input", debounce(go, 300, true), false)
+        div1.addEventListener('mousemove', throttle(go, 500, true), false)
+        div2.addEventListener('mousemove', throttle(function () { console.log('2') }, 500, true), false)
+    </script>
+</body>
+
+</html>

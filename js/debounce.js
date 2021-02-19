@@ -26,3 +26,4 @@ function debounce(fn, wait, immediate) {
     return deb
 
 }
+

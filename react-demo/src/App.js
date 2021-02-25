@@ -19,7 +19,7 @@ const FaDou = LazyLoad(React.lazy(() => import(/* webpackChunkName: "Dog" */ './
 const config = [
     { path: '/login', component: Login },
     { path: '/regist', component: Regist },
-    // { path: '/404', component: () => <div>404</div> },
+    { path: '/404', component: () => <div>404</div> },
     {
         path: "/animal",
         component: Layout,
@@ -31,11 +31,12 @@ const config = [
                 path: '/animal/dog', component: DogLayout,
                 children: [
                     { path: '/animal/dog/:id', component: KeJi },
-                    // { path: '/animal/dog/fadou', component: FaDou }
+                    //{ path: '/animal/dog/fadou', component: FaDou }
                 ]
             },
         ]
-    }
+    },
+
 ]
 const sleep = (time) => new Promise((resolve) => {
     setTimeout(() => {
@@ -44,21 +45,26 @@ const sleep = (time) => new Promise((resolve) => {
 })
 
 export default () => {
+    const [loading, setLoading] = useState(false);
     return (
-        <RouterStrong
-            indexPath='/animal/cat'
-            noMatch='/404'
-            mode={'history'}
-            isSwitch={true}
-            config={config}
-            beforeEach={async (to, from, next) => {
-                await sleep(2000)
-                next()
-            }}
-            afterEach={() => {
-                console.log('--------------afterEach-----------------------')
-            }}
-        >
-        </RouterStrong>
+        <Spin spinning={loading}>
+            <RouterStrong
+                indexPath='/animal/cat'
+                noMatch='/404'
+                mode={'history'}
+                isSwitch={true}
+                config={config}
+                beforeEach={async (to, from, next) => {
+                    setLoading(true);
+                    await sleep(2000);
+                    next()
+                    setLoading(false);
+                }}
+                afterEach={() => {
+                    //console.log('--------------afterEach-----------------------')
+                }}
+            >
+            </RouterStrong>
+        </Spin>
     )
 };

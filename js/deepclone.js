@@ -1,12 +1,14 @@
 function deepClone(obj, hash = new WeakMap) {
   if (hash.has(obj)) return hash.get(obj);
   let tp = [Date, RegExp, Set, WeakSet, Map, WeakMap];
-  if (tp.includes(obj.constructor)) return new obj.constructor(obj);
+  if (tp.includes(obj.constructor)) {
+    return new obj.constructor(obj);
+  }
   let newObj = Object.create(obj.__proto__, Object.getOwnPropertyDescriptors(obj));
   hash.set(obj, newObj);
   for (let key of Reflect.ownKeys(obj)) {
     let value = obj[key];
-    newObj[key] = typeof value === 'object' && value !== null ? deepClone(value) : value
+    newObj[key] = typeof value === 'object' && value !== null ? deepClone(value, hash) : value
   }
   return newObj
 }
@@ -19,6 +21,7 @@ let obj = {
   bool: true,
   fn: function () { },
   symb: Symbol(3),
+  [Symbol]: 'this key is Symbol',
   arr: [{ a: { b: 10 } }],
   obj: {
     a: {
@@ -37,7 +40,7 @@ obj.loop = obj;
 
 
 let newObj = deepClone(obj);
-newObj.arr[0].a.b = 989899
+// newObj.arr[0].a.b = 989899
 console.log('obj', obj)
 console.log('newobj', newObj);
 for (let key of Reflect.ownKeys(obj)) {

@@ -30,8 +30,8 @@ const config = [
             {
                 path: '/animal/dog', component: DogLayout,
                 children: [
-                    { path: '/animal/dog/:id', component: KeJi },
-                    //{ path: '/animal/dog/fadou', component: FaDou }
+                    { path: '/animal/dog/keji', component: KeJi },
+                    { path: '/animal/dog/fadou', component: FaDou }
                 ]
             },
         ]

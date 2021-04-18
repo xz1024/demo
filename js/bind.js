@@ -17,3 +17,24 @@ if (!Function.prototype.bind) {
         return fBound
     }
 }
+
+Function.prototype._bind = function (oThis) {
+    if (typeof this !== 'function') {
+        throw TypeError()
+    }
+    var args = [].slice.call(arguments, 1);
+    var self = this;
+    var Noop = function () { };
+    var fBound = function () {
+        var bindArgs = [].slice.call(arguments);
+        return self.apply(
+            this instanceof fBound ? this : oThis,
+            args.concat(bindArgs)
+        )
+    }
+    if (this.prototype) {
+        Noop.prototype = this.prototype
+    }
+    fBound.prototype = new Noop();
+    return fBound
+}

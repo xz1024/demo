@@ -26,14 +26,15 @@ Function.prototype._apply = function (context, arr) {
     return res;
 }
 
-Function.prototype._mycall = function (context) {
-    var ctx = context || window;
-    ctx.fn = this;
-    var args = [];
-    for (var i = 1, len = arguments.length; i < len; i++) {
-        args.push("arguments[" + i + "]")
+Function.prototype._mycall = function (obj) {
+    var ctx = obj || window;
+    ctx.fn = this
+    var arg = [];
+    var len = arguments.length;
+    for (var i = 1; i < len; i++) {
+        arg.push("arguments[" + i + "]")
     }
-    var res = eval("ctx.fn(" + args + ")")
-    delete ctx.fn;
+    var res = eval('ctx.fn(' + arg + ')')
+    delete ctx.fn
     return res
 }
